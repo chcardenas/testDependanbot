@@ -21,6 +21,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
                     git tag -a $version-RFS -m $version-RFS
                     git tag -a $version-RC -m $version-RC
                     git tag -a $version-KO -m $version-KO
+                    git push --tags
                     break
             fi
 
@@ -30,6 +31,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
                         git tag -a $version-RFS -m $version-RFS
                         git tag -a $version-RC -m $version-RC
                         git tag -a $version-KO -m $version-KO
+                        git push --tags
                     break
             fi
 
@@ -39,6 +41,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
                     git tag -a $version-RFS -m $version-RFS
                     git tag -a $version-RC -m $version-RC
                     git tag -a $version-KO -m $version-KO
+                    git push --tags
             fi
         
     done
