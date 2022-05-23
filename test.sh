@@ -7,9 +7,9 @@ version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
 commit_message=$(git log -1 --pretty=format:"%s")
 feat=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
 echo $feat
-
+msg=$(echo "### $feat \n\n\n")
 size=$(echo $feat | wc -c)
-echo $size
+echo $msg
 if [ $size -lt 2 ]; then
     echo "zero" 
 else

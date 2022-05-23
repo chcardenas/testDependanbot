@@ -7,7 +7,6 @@ changelog_file=CHANGELOG.md
 git config --global user.name 'christian bot'
 git config  --global user.email 'chcardenas.ext@acciona.com'
 
-git checkout development 
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
@@ -56,6 +55,7 @@ done
 date=$(git show -s --format=%cd --date=short )
 msg=$(echo "## v$version ($date) \n\n\n")
  echo "$msg" >> $changelog_file
+git  checkout development
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
 git push 
