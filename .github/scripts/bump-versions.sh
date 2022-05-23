@@ -14,47 +14,48 @@ for cmt in $(git rev-list --reverse $before..$after); do
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
     size=$(echo $msg | wc -c)
     read -a strarr <<< "$msg"
-    if [ $size -lt 2 ]; then
-        msg=$(echo - $starr[1]) 
-    else
-        #non-zero length
-        msg=$(echo "- ***$msg***: $starr[1] \n\n\n") 
-    fi
     
-    echo "$msg" >> $changelog_file
+    
+    
     for change in ${changes[@]}; do
-
-            msg=$(echo "### $starr[0] \n\n\n")
-            echo "$msg" >> $changelog_file
+            if [ $size -lt 2 ]; then
+                msg=$(echo - $starr[1]) 
+            else
+                #non-zero length
+                msg=$(echo "- ***$msg***: $starr[1] \n\n\n") 
+            fi
+            msgb=$(echo "### $starr[0] \n\n\n")
+            
             if echo $commit_message | grep -qE '(!:)|BREAKING'; then
         
                     
-                    npm version major
-                    version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
-                  
+                    npm version major                  
                     
                     break
             fi
 
             if echo $commit_msg | grep -qE '^feat'; then
                        npm version minor
-                       version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
                         
                     break
             fi
 
             if ! echo $commit_msg| grep -qE '^fix'; then
                     npm version patch
-                    version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
                     
             fi
         
     done
     
 done
+version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
 date=$(git show -s --format=%cd --date=short )
-msg=$(echo "## v$version ($date) \n\n\n")
- echo "$msg" >> $changelog_file
+msgc=$(echo "## v$version ($date) \n\n\n")
+echo "$msgc" >> $changelog_file
+echo "$msgb" >> $changelog_file
+echo "$msg" >> $changelog_file
+
+
 git  checkout development
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
