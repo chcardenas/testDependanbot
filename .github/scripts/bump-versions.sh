@@ -2,6 +2,9 @@
 
 after=${AFTER_COMMIT_SHA}
 before=${BEFORE_COMMIT_SHA}
+git config --global user.name 'christian bot'
+git config  --global user.email 'chcardenas.ext@acciona.com'
+
 git checkout development -q
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
