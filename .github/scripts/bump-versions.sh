@@ -65,5 +65,3 @@ msg=$(echo "## v$version ($date) \n\n\n")
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
 git push --tags
-
-
