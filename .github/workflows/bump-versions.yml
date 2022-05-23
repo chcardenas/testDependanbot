@@ -1,0 +1,18 @@
+name: Bump project versions
+on:
+  push:
+    - 'develop'
+jobs:
+  bump-versions:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Bump versions
+        run: |
+          $GITHUB_WORKSPACE/.github/scripts/bump-versions.sh
+        env:
+          AFTER_COMMIT_SHA: ${{ github.event.after }}
+          BEFORE_COMMIT_SHA: ${{ github.event.before }}
