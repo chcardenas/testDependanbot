@@ -17,7 +17,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
 
             if echo $commit_message | grep -qE '(!:)|BREAKING'; then
                     npm version major
-                    version= awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json
+                    version=${awk '/version/{gsub(/("|",)/,"",$2);print $2}'} package.json
                     git tag -a $version-RFS -m $version-RFS
                     git tag -a $version-RC -m $version-RC
                     git tag -a $version-KO -m $version-KO
@@ -26,7 +26,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
 
             if echo $commit_msg | grep -qE '^feat'; then
                        npm version minor
-                       version= awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json
+                       version=${awk '/version/{gsub(/("|",)/,"",$2);print $2}'} package.json
                         git tag -a $version-RFS -m $version-RFS
                         git tag -a $version-RC -m $version-RC
                         git tag -a $version-KO -m $version-KO
@@ -35,7 +35,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
 
             if ! echo $commit_msg| grep -qE '^fix'; then
                     npm version patch
-                    version= awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json
+                    version=${awk '/version/{gsub(/("|",)/,"",$2);print $2}'} package.json
                     git tag -a $version-RFS -m $version-RFS
                     git tag -a $version-RC -m $version-RC
                     git tag -a $version-KO -m $version-KO
