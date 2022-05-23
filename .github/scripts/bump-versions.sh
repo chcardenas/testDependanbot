@@ -32,9 +32,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
                     
                     npm version major
                     version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
-                    git tag -a $version-RFS -m $version-RFS
-                    git tag -a $version-RC -m $version-RC
-                    git tag -a $version-KO -m $version-KO
+                  
                     
                     break
             fi
@@ -42,18 +40,14 @@ for cmt in $(git rev-list --reverse $before..$after); do
             if echo $commit_msg | grep -qE '^feat'; then
                        npm version minor
                        version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
-                        git tag -a $version-RFS -m $version-RFS
-                        git tag -a $version-RC -m $version-RC
-                        git tag -a $version-KO -m $version-KO
+                        
                     break
             fi
 
             if ! echo $commit_msg| grep -qE '^fix'; then
                     npm version patch
                     version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
-                    git tag -a $version-RFS -m $version-RFS
-                    git tag -a $version-RC -m $version-RC
-                    git tag -a $version-KO -m $version-KO
+                    
             fi
         
     done
@@ -64,4 +58,8 @@ msg=$(echo "## v$version ($date) \n\n\n")
  echo "$msg" >> $changelog_file
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
+git push 
+git tag -a $version-RFS -m $version-RFS
+git tag -a $version-RC -m $version-RC
+git tag -a $version-KO -m $version-KO
 git push --tags
