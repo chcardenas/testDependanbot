@@ -22,9 +22,9 @@ for cmt in $(git rev-list --reverse $before..$after); do
                 msg=$(echo - $starr[1]) 
             else
                 #non-zero length
-                msg=$(echo "- ***$msg***: $starr[1] \n\n\n") 
+                msg=$(echo "- ***$msg***: $starr[1] ") 
             fi
-            msgb=$(echo "### $starr[0] \n\n\n")
+            msgb=$(echo "### $starr[0] ")
             
             if echo $commit_message | grep -qE '(!:)|BREAKING'; then
         
@@ -50,12 +50,14 @@ for cmt in $(git rev-list --reverse $before..$after); do
 done
 version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
 date=$(git show -s --format=%cd --date=short )
-msgc=$(echo "## v$version ($date) \n\n\n")
-echo "$msgc" >> $changelog_file
-echo "$msgb" >> $changelog_file
-echo "$msg" >> $changelog_file
+msgc=$(echo "## v$version ($date) ")
+#echo "$msgc" >> $changelog_file
+#echo "$msgb" >> $changelog_file
+#echo "$msg" >> $changelog_file
 
-
+sed -i $msg
+sed -i $msgb
+sed -i $msgc
 git  checkout development
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
