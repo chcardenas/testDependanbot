@@ -1,7 +1,7 @@
 #!/bin/bash
 
-after=842f9f82ec4069733810aaeb5a97ec1900654349 
-before=4071057ddd3dac6558dcb464d321184592bfa7da
+after=${AFTER_COMMIT_SHA}
+before=${BEFORE_COMMIT_SHA}
 git checkout development -q
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
@@ -10,7 +10,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
 
 
     for change in ${changes[@]}; do
-        
+
 
             if echo $commit_message | grep -qE '(!:)|BREAKING'; then
                     npm version major
@@ -30,7 +30,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
                     break
             fi
 
-            if ! echo $(cat $version_change_file) | grep -qE '(MAJOR)|(MINOR)'; then
+            if ! echo $commit_msg| grep -qE '^fix'; then
                     npm version patch
                     version= awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json
                     git tag -a $version-RFS -m $version-RFS
