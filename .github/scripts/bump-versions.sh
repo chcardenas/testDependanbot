@@ -10,7 +10,6 @@ git config  --global user.email 'chcardenas.ext@acciona.com'
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
-    echo "Message: $commit_message" 
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
     size=$(echo $msg | wc -c)
     read -a strarr <<< "$msg"
@@ -21,7 +20,6 @@ for cmt in $(git rev-list --reverse $before..$after); do
             msg=$(echo "- ***$msg***: $strarr[1] ") 
         fi
         msgb=$(echo "### $strarr[0] ")
-        echo  " commit messaje :: $commit_message"
         if echo $commit_message | grep -qE '(!:)|BREAKING'; then
         
            echo "major version"

@@ -19,7 +19,7 @@ fi
 
 feat="feat(feature):asdsad
 BREAKING"
-if  echo $feat | grep -qE 'BREAKINGs'; then
+if  echo $feat | grep -qE '^feat'; then
                     echo true
-                    
+                    npm version major
 fi
