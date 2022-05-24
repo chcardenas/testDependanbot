@@ -55,9 +55,10 @@ msgc=$(echo "## v$version ($date) ")
 #echo "$msgb" >> $changelog_file
 #echo "$msg" >> $changelog_file
 
-sed -i $msg
-sed -i $msgb
-sed -i $msgc
+echo -e "$msgc \n$(cat $changelog_file)" > $changelog_file
+echo -e "$msgb \n$(cat $changelog_file)" > $changelog_file
+echo -e "$msg \n$(cat $changelog_file)" > $changelog_file
+
 git  checkout development
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
