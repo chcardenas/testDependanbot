@@ -1,3 +1,6 @@
+- ***dependabot***: dependabot[1]  
+### dependabot[0]  
+## v3.0.3 (2022-05-24)  
 - ***feature***: [1]  
 ### [0]  
 ## v3.0.4 (2022-05-24)  
