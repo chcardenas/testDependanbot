@@ -14,7 +14,6 @@ for cmt in $(git rev-list --reverse $before..$after); do
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
     size=$(echo $msg | wc -c)
     read -a strarr <<< "$msg"
-
         if [ $size -lt 2 ]; then
            msg=$(echo - $strarr[1]) 
         else
