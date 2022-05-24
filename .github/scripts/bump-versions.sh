@@ -21,7 +21,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
             msg=$(echo "- ***$msg***: $strarr[1] ") 
         fi
         msgb=$(echo "### $strarr[0] ")
-        echo $commit_message
+        echo  " commit messaje :: $commit_message"
         if echo $commit_message | grep -qE '(!:)|BREAKING'; then
         
            echo "major version"
