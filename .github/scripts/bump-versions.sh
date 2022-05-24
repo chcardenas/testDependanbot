@@ -19,12 +19,12 @@ for cmt in $(git rev-list --reverse $before..$after); do
     
     for change in ${changes[@]}; do
             if [ $size -lt 2 ]; then
-                msg=$(echo - $starr[1]) 
+                msg=$(echo - $strarr[1]) 
             else
                 #non-zero length
-                msg=$(echo "- ***$msg***: $starr[1] ") 
+                msg=$(echo "- ***$msg***: $strarr[1] ") 
             fi
-            msgb=$(echo "### $starr[0] ")
+            msgb=$(echo "### $strarr[0] ")
             
             if echo $commit_message | grep -qE '(!:)|BREAKING'; then
         
@@ -40,7 +40,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
                     break
             fi
 
-            if ! echo $commit_msg| grep -qE '^fix'; then
+            if  echo $commit_msg| grep -qE '^fix'; then
                     npm version patch
                     
             fi

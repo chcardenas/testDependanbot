@@ -16,3 +16,10 @@ else
     #non-zero length
     echo "filed"
 fi
+
+feat="feat(feature):asdsad
+BREAKING"
+if  echo $feat | grep -qE 'BREAKINGs'; then
+                    echo true
+                    
+fi
