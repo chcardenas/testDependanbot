@@ -18,7 +18,6 @@ for cmt in $(git rev-list --reverse $before..$after); do
     
     
     
-    for change in ${changes[@]}; do
         echo $change
         if [ $size -lt 2 ]; then
            msg=$(echo - $strarr[1]) 
@@ -48,7 +47,6 @@ for cmt in $(git rev-list --reverse $before..$after); do
                     
         fi
         
-    done
     
 done
 
@@ -60,10 +58,10 @@ msgc=$(echo "## v$version ($date) ")
 #echo "$msgb" >> $changelog_file
 #echo "$msg" >> $changelog_file
 
-echo -e "$msgc \n$(cat $changelog_file)" > $changelog_file
-echo -e "$msgb \n$(cat $changelog_file)" > $changelog_file
-echo -e "$msg \n$(cat $changelog_file)" > $changelog_file
+echo -e "$msg \n\n\n$(cat $changelog_file)" > $changelog_file
+echo -e "$msgb \n\n\n$(cat $changelog_file)" > $changelog_file
 
+echo -e "$msgc \n\n\n$(cat $changelog_file)" > $changelog_file
 git  checkout development
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
