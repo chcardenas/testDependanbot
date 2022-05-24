@@ -23,3 +23,4 @@ if  echo $feat | grep -qE '^feat'; then
                     echo true
                     npm version major
 fi
+
