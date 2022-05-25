@@ -27,4 +27,8 @@ if  echo $feat | grep -qE '^feat'; then
                     echo true
                     
 fi
+if echo $commit_message | grep -qE '^feat'; then
+           echo "minor version"
+           break
+fi
 

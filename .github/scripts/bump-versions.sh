@@ -4,8 +4,6 @@ after=${AFTER_COMMIT_SHA}
 before=${BEFORE_COMMIT_SHA}
 IFS=':'
 changelog_file=CHANGELOG.md
-git config --global user.name 'christian bot'
-git config  --global user.email 'chcardenas.ext@acciona.com'
 
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
@@ -26,13 +24,13 @@ for cmt in $(git rev-list --reverse $before..$after); do
            break
         fi
 
-        if echo $commit_msg | grep -qE '^feat'; then
+        if echo $commit_message | grep -qE '^feat'; then
            echo "minor version"
            npm version minor             
            break
         fi
 
-        if  echo $commit_msg| grep -qE '^fix'; then
+        if  echo $commit_message| grep -qE '^fix'; then
             echo "patch version"
             npm version patch
                     
@@ -54,7 +52,6 @@ echo -e "$msgb \n\n\n$(cat $changelog_file)" > $changelog_file
 
 echo -e "$msgc \n\n\n$(cat $changelog_file)" > $changelog_file
 git  checkout development
-git checkout -b bumpVersion
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
 git push 
@@ -62,4 +59,3 @@ git tag -a $version-RFS -m $version-RFS
 git tag -a $version-RC -m $version-RC
 git tag -a $version-KO -m $version-KO
 git push --tags
-git request-pull development ./
