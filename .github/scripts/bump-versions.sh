@@ -7,9 +7,7 @@ changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 push=0
-if [[ "$before" -eq  "0000000000000000000000000000000000000000" ]]; then
-    exit 1;
-fi
+
 for cmt in git$(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
