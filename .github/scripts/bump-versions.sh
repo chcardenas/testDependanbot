@@ -8,7 +8,7 @@ git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 push=0
 remoteRepo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-echo remoteRepo
+echo $remoteRepo
 for cmt in git$(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
