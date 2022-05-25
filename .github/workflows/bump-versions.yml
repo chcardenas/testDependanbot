@@ -18,7 +18,6 @@ jobs:
           AFTER_COMMIT_SHA: ${{ github.event.after }}
           BEFORE_COMMIT_SHA: ${{ github.event.before }}
         run: |
-          git config user.name "GITHUBACTION" |
           $GITHUB_WORKSPACE/.github/scripts/bump-versions.sh 
 
           
