@@ -1,6 +1,6 @@
 name: Bump project versions
 on:
-  push:
+  merge:
     branch:
       - 'development'
 jobs:
