@@ -23,5 +23,3 @@ jobs:
           BEFORE_COMMIT_SHA: ${{ github.event.before }}
         run: |
           $GITHUB_WORKSPACE/.github/scripts/bump-versions.sh 
-
-          
