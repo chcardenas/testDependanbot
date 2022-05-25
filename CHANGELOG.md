@@ -1,6 +1,15 @@
 ## v7.1.14 (2022-05-25)  
 
 
+### Merge branch 'development' of github.com chcardenas/testDependanbot into development  
+
+
+- ***Merge branch 'development' of github.com chcardenas/testDependanbot into development***:   
+
+
+## v7.1.14 (2022-05-25)  
+
+
 ### fix  updates  
 
 
