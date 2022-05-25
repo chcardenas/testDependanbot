@@ -1,3 +1,12 @@
+## v6.1.9 (2022-05-25)  
+
+
+### Merge pull request #8 from chcardenas/fix5  
+
+
+- ***Merge pull request #8 from chcardenas/fix5***:   
+
+
 ## v4.0.0 (2022-05-24)  
 
 
