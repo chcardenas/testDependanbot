@@ -7,7 +7,7 @@ changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 push=0
-remoteRepo='https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git'
+remoteRepo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 echo $remoteRepo
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
@@ -64,7 +64,7 @@ echo -e "$msgc \n\n\n$(cat $changelog_file)" > $changelog_file
 git  checkout development
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
-git push $remoteRepo
+git push 
 git tag -a $version-RFS -m $version-RFS
 git tag -a $version-RC -m $version-RC
 git tag -a $version-KO -m $version-KO
