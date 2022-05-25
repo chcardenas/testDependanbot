@@ -2,7 +2,7 @@ name: Bump project versions
 on:
   push:
     branch:
-      - 'develop'
+      - 'development'
 jobs:
   bump-versions:
     if: "!contains(github.event.head_commit.author.name, 'GITHUBACTION')"
