@@ -7,11 +7,12 @@ changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 
-for cmt in $(git rev-list --reverse $before..$after); do
+for cmt in git$(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
     size=$(echo $msg | wc -c)
+    echo "SIze ${size}"
     read -a strarr <<< "$msg"
         if [ $size -lt 2 ]; then
            msg="- ${strarr[1]}" 
