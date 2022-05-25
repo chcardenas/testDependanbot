@@ -29,9 +29,10 @@ if  echo $feat | grep -qE '^feat'; then
                     echo true
                     
 fi
-if echo $commit_message | grep -qE '^feat'; then
-           echo "minor version"
-           break
+push="0001"
+zero=1
+if [[ "$push" -eq "000" ]]; then
+    exit 1;
 fi
 
-
+echo "exit"
