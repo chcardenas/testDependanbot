@@ -9,7 +9,7 @@ git config --global user.email "chcardenas.ext@acciona.com"
 push=0
 remoteRepo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 echo $remoteRepo
-for cmt in git$(git rev-list --reverse $before..$after); do
+for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
