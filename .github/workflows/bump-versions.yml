@@ -5,6 +5,7 @@ on:
       - 'develop'
 jobs:
   bump-versions:
+    if: "!contains(github.event.head_commit.author.name, 'GITHUBACTION')"
     runs-on: ubuntu-latest
     steps: 
       - name: checkout
@@ -13,7 +14,9 @@ jobs:
           fetch-depth: 0
       - name: Bump versions
         run: |
-          $GITHUB_WORKSPACE/.github/scripts/bump-versions.sh
+          git config user.name "GITHUBACTION" |
+          $GITHUB_WORKSPACE/.github/scripts/bump-versions.sh 
+          
         env:
           AFTER_COMMIT_SHA: ${{ github.event.after }}
           BEFORE_COMMIT_SHA: ${{ github.event.before }}
