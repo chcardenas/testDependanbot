@@ -7,6 +7,9 @@ changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 push=0
+if [[ "$before" -eq  "0000000000000000000000000000000000000000" ]]; then
+    exit 1;
+fi
 for cmt in git$(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
@@ -40,8 +43,9 @@ for cmt in git$(git rev-list --reverse $before..$after); do
         
     push=1
 done
-if ["$push" -eq "0" ]; then
-    exit 1
+zero=0
+if [[ $push -eq $zero ]]; then
+    exit 1;
 fi
 version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
 echo $version
