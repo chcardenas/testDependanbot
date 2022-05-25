@@ -14,14 +14,12 @@ for cmt in $(git rev-list --reverse $before..$after); do
     size=$(echo $msg | wc -c)
     read -a strarr <<< "$msg"
         if [ $size -lt 2 ]; then
-           msg=$(echo - $strarr[1]) 
+           msg=$(echo - ${strarr[1]}) 
         else
-           #non-zero length
-            msg=$(echo "- ***$msg***: $strarr[1] ") 
+            msg=$(echo "- ***$msg***: ${strarr[1]} ") 
         fi
-        msgb=$(echo "### $strarr[0] ")
-        if echo $commit_message | grep -qE '(!:)|BREAKING'; then
-        
+        msgb=$(echo "### ${strarr[0]} ")
+        if echo $commit_message | grep -qE '(!:)|BREAKING'; then 
            echo "major version"
            npm version major                  
                     
@@ -56,6 +54,7 @@ echo -e "$msgb \n\n\n$(cat $changelog_file)" > $changelog_file
 
 echo -e "$msgc \n\n\n$(cat $changelog_file)" > $changelog_file
 git  checkout development
+git checkout -b bumpVersion
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
 git push 
@@ -63,3 +62,4 @@ git tag -a $version-RFS -m $version-RFS
 git tag -a $version-RC -m $version-RC
 git tag -a $version-KO -m $version-KO
 git push --tags
+git request-pull development ./
