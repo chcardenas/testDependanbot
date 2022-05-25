@@ -11,4 +11,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          configuration-path: .github/labels.yml
+          configuration-path: .github/default-pr-labels.yml
