@@ -7,10 +7,11 @@ changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 push=0
-remoteRepo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+remoteRepo="https://christian:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 echo $remoteRepo
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
+    echo "Looking messages"
     commit_message=$(git log -1 --pretty=format:"%s")
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
     size=$(echo $msg | wc -c)
@@ -21,6 +22,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
             msg="- ***$msg***: ${strarr[1]} " 
         fi
         msgb="### ${strarr[0]} "
+
         if echo $commit_message | grep -qE '(!:)|BREAKING'; then 
            echo "major version"
            npm version major                  
@@ -44,6 +46,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
 done
 zero=0
 if [[ $push -eq $zero ]]; then
+    echo "Exit without changes"
     exit 1;
 fi
 version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
