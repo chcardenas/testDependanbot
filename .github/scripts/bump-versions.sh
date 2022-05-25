@@ -7,9 +7,8 @@ changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 push=0
-remoteRepo="christian:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+remoteRepo='https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git'
 echo $remoteRepo
-
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     echo "Looking messages"
@@ -23,7 +22,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
             msg="- ***$msg***: ${strarr[1]} " 
         fi
         msgb="### ${strarr[0]} "
-
+        
         if echo $commit_message | grep -qE '(!:)|BREAKING'; then 
            echo "major version"
            npm version major                  
