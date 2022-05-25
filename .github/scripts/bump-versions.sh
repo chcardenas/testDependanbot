@@ -6,13 +6,12 @@ IFS=':'
 changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
-
+push=0
 for cmt in git$(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     commit_message=$(git log -1 --pretty=format:"%s")
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
     size=$(echo $msg | wc -c)
-    echo "SIze ${size}"
     read -a strarr <<< "$msg"
         if [ $size -lt 2 ]; then
            msg="- ${strarr[1]}" 
@@ -39,9 +38,11 @@ for cmt in git$(git rev-list --reverse $before..$after); do
                     
         fi
         
-    
+    push=1
 done
-
+if ["$push" -eq "0" ]; then
+    exit 1
+fi
 version=$(awk '/version/{gsub(/("|",)/,"",$2);print $2}' package.json)
 echo $version
 date=$(git show -s --format=%cd --date=short )
@@ -62,3 +63,4 @@ git tag -a $version-RFS -m $version-RFS
 git tag -a $version-RC -m $version-RC
 git tag -a $version-KO -m $version-KO
 git push --tags
+exit 0
