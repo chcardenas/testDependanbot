@@ -68,5 +68,5 @@ git push
 git tag -a $version-RFS -m $version-RFS
 git tag -a $version-RC -m $version-RC
 git tag -a $version-KO -m $version-KO
-git push $remoteRepo --tags
+git push  --tags
 exit 0
