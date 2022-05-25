@@ -7,7 +7,7 @@ changelog_file=CHANGELOG.md
 git config --global user.name "christian cardenas"
 git config --global user.email "chcardenas.ext@acciona.com"
 push=0
-remoteRepo="https://christian:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+remoteRepo="christian:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 echo $remoteRepo
 
 for cmt in $(git rev-list --reverse $before..$after); do
