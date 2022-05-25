@@ -13,10 +13,12 @@ jobs:
         with:
           fetch-depth: 0
       - name: Bump versions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          AFTER_COMMIT_SHA: ${{ github.event.after }}
+          BEFORE_COMMIT_SHA: ${{ github.event.before }}
         run: |
           git config user.name "GITHUBACTION" |
           $GITHUB_WORKSPACE/.github/scripts/bump-versions.sh 
+
           
-        env:
-          AFTER_COMMIT_SHA: ${{ github.event.after }}
-          BEFORE_COMMIT_SHA: ${{ github.event.before }}
