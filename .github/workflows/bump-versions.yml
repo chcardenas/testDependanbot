@@ -3,6 +3,9 @@ on:
   push:
     branch:
       - 'development'
+    paths-ignore:  
+      - 'package.json'  
+      - 'CHANGELOG.md' 
 jobs:
   bump-versions:
     if: "!contains(github.event.head_commit.author.name, 'GITHUBACTION')"
