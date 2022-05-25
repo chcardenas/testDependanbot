@@ -13,6 +13,8 @@ size=$(echo $feat | wc -c)
 echo $commit_message
 read -r -a strarr <<< "$commit_message"
 echo ${strarr[1]}
+data=" - ${strarr[1]}"
+echo $data
 if [ $size -lt 2 ]; then
     echo "zero" 
 else

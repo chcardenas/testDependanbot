@@ -4,6 +4,8 @@ after=${AFTER_COMMIT_SHA}
 before=${BEFORE_COMMIT_SHA}
 IFS=':'
 changelog_file=CHANGELOG.md
+git config --global user.name "christian cardenas"
+git config --global user.email "chcardenas.ext@acciona.com"
 
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
@@ -12,11 +14,11 @@ for cmt in $(git rev-list --reverse $before..$after); do
     size=$(echo $msg | wc -c)
     read -a strarr <<< "$msg"
         if [ $size -lt 2 ]; then
-           msg=$(echo - ${strarr[1]}) 
+           msg="- ${strarr[1]}" 
         else
-            msg=$(echo "- ***$msg***: ${strarr[1]} ") 
+            msg="- ***$msg***: ${strarr[1]} " 
         fi
-        msgb=$(echo "### ${strarr[0]} ")
+        msgb="### ${strarr[0]} "
         if echo $commit_message | grep -qE '(!:)|BREAKING'; then 
            echo "major version"
            npm version major                  
@@ -30,7 +32,7 @@ for cmt in $(git rev-list --reverse $before..$after); do
            break
         fi
 
-        if  echo $commit_message| grep -qE '^fix'; then
+        if  echo $commit_message | grep -qE '^fix'; then
             echo "patch version"
             npm version patch
                     
