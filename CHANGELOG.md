@@ -73,6 +73,15 @@
 ## v7.1.13 (2022-05-25)  
 
 
+### CI  bump versions  
+
+
+- ***CI  bump versions***:   
+
+
+## v7.1.13 (2022-05-25)  
+
+
 ### Merge branch 'development' of github.com chcardenas/testDependanbot into development  
 
 
