@@ -1,1 +1,2 @@
 # testDependanbot
+ok
