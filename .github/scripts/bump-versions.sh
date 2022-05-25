@@ -26,23 +26,24 @@ for cmt in $(git rev-list --reverse $before..$after); do
         if echo $commit_message | grep -qE '(!:)|BREAKING'; then 
            echo "major version"
            npm version major --git-tag-version false 
-                    
+           push=1
            break
         fi
 
         if echo $commit_message | grep -qE '^feat'; then
            echo "minor version"
            npm version minor --git-tag-version false
+           push=1
            break
         fi
 
         if  echo $commit_message | grep -qE '^fix'; then
             echo "patch version"
             npm version patch --git-tag-version false
-                    
+            push=1
         fi
         
-    push=1
+    
 done
 zero=0
 if [[ $push -eq $zero ]]; then
