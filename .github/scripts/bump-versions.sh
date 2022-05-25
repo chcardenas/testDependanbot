@@ -56,7 +56,7 @@ echo -e "$msgc \n\n\n$(cat $changelog_file)" > $changelog_file
 git  checkout development
 git add package.json CHANGELOG.md
 git commit -m "CI: bump versions"
-git push 
+git push -f
 git tag -a $version-RFS -m $version-RFS
 git tag -a $version-RC -m $version-RC
 git tag -a $version-KO -m $version-KO
