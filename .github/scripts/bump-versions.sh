@@ -12,14 +12,15 @@ echo $remoteRepo
 for cmt in $(git rev-list --reverse $before..$after); do
     git checkout -q $cmt
     echo "Looking messages"
-    commit_message=$(git log -1 --pretty=format:"%s")
+    commit_message=$(git log -1 --pretty=format:"%b")
     msg=$(echo $commit_message | cut -d "(" -f2 | cut -d ")" -f1)
     size=$(echo $msg | wc -c)
-    read -a strarr <<< "$msg"
+    read -a strarr <<< "$commit_message"
+        comments=$(git log -1 -s --pretty=format:"%b")
         if [ $size -lt 2 ]; then
-           msg="- ${strarr[1]}" 
+           msg="- ${comments}" 
         else
-            msg="- ***$msg***: ${strarr[1]} " 
+            msg="- ***$msg***: ${comments} " 
         fi
         msgb="### ${strarr[0]} "
         
