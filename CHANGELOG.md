@@ -1,3 +1,14 @@
+## v7.2.2 (2022-05-26)  
+
+
+### fix split string on bump version script  
+
+
+- ***fix split string on bump version script
+asw***: fix split string on bump version script
+asw  
+
+
 ## v7.2.1 (2022-05-25)  
 
 
