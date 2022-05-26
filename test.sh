@@ -36,3 +36,4 @@ if [[ "$push" -eq "000" ]]; then
 fi
 
 echo "exit"
+
